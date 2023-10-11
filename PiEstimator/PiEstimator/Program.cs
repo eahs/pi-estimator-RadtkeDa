@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace PiEstimator
 {
@@ -24,9 +26,29 @@ namespace PiEstimator
         {
             Random rand = new Random(System.Environment.TickCount);
             double pi = 0.0;
+            int iterations = 0;
+            double numInside = 1;
+            double numOutside = 1;
 
+            while(iterations<n)
+            {
+                double x = rand.NextDouble();
+                double y = rand.NextDouble();
+                    
+                if (Math.Sqrt(x * x + y * y) <= 1)
+                {
+                    numInside++;
+                    
+                }
+                else
+                {
+                    numOutside++;
+                }
+                 
+                iterations++;
+                pi = (numInside/iterations)*4;
+            }
             // TODO: Calculate Pi
-
             return pi;
         }
 
